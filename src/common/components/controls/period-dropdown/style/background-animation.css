@@ -1,0 +1,11 @@
+.invisible-transition {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 200ms ease, visibility 200ms ease;
+}
+
+.visible-transition {
+  opacity: 0.3;
+  visibility: visible;
+  transition: opacity 200ms ease;
+}

@@ -1,0 +1,65 @@
+.ag-theme-balham {
+  --ag-header-foreground-color: black;
+  --ag-foreground-color: black;
+  --ag-header-background-color: white;
+  --ag-font-family: "Inter", "Roboto", "Helvetica", "Arial", sans-serif;
+  --ag-font-size: 0.875rem;
+  --ag-balham-accent-color: #ba456b;
+  --ag-balham-active-color: #ba456b;
+  --ag-input-focus-border-color: #ba456b;
+  --ag-selected-row-background-color: #f2f2f5;
+  --ag-input-focus-box-shadow: none;
+}
+.ag-theme-balham .ag-root-wrapper {
+  height: 100%;
+  border: none;
+}
+
+.ag-theme-balham .ag-input-field-input {
+  cursor: pointer;
+}
+
+.ag-theme-balham .ag-row {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+
+.ag-center-cols-container {
+  min-width: 100%;
+}
+
+.ag-theme-balham.big-line-height .ag-cell,
+.big-line-height .ag-theme-balham .ag-cell {
+  line-height: 41px !important;
+}
+
+div.ag-header-cell-label {
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: black;
+}
+
+.height-fix {
+  height: 700px !important;
+}
+
+.importer-table .ag-row.delete-operation {
+  background-color: theme("colors.red.100");
+  --ag-row-hover-color: theme("colors.red.300");
+}
+
+.importer-table .ag-row.create-operation {
+  background-color: theme("colors.green.100");
+  --ag-row-hover-color: theme("colors.green.300");
+}
+
+.importer-table .ag-row.update-operation {
+  background-color: theme("colors.yellow.100");
+  --ag-row-hover-color: theme("colors.yellow.200");
+}
+
+.importer-table .ag-row.no-operation {
+  background-color: theme("colors.white");
+  --ag-row-hover-color: theme("colors.white");
+}

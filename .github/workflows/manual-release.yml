@@ -1,0 +1,42 @@
+name: manual-release
+
+on: 
+  workflow_dispatch:
+    inputs:
+      tenantId:
+        description: 'Tenant id'     
+        required: true
+        default: 'optravis'
+      tagVersion:
+        description: 'Tag version'     
+        required: true
+        default: '1.28.1'
+
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.inputs.tagVersion }}
+          fetch-depth: 0
+
+      - name: Amend "PUBLIC_URL_ARG" in Dockerfile
+        uses: jacobtomlinson/gha-find-replace@v3
+        with:
+          find: "PUBLIC_URL_ARG=/sctool/optravis"
+          replace: "PUBLIC_URL_ARG=/sctool/${{ github.event.inputs.tenantId }}"
+          include: "Dockerfile"
+
+      - uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ github.token }}
+
+      - name: Build Container
+        run: docker build -t ghcr.io/optravis-llc/service-charges-frontend:${{ github.event.inputs.tagVersion }}-${{ github.event.inputs.tenantId }} .
+
+      - name: Push Container to Artifact Registry
+        run: docker push ghcr.io/optravis-llc/service-charges-frontend:${{ github.event.inputs.tagVersion }}-${{ github.event.inputs.tenantId }}

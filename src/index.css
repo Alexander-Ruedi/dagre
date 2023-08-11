@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#root {
+  height: 100%;
+  flex-direction: column;
+  flex-grow: 1;
+  display: flex;
+}
+
+.MuiAutocomplete-listbox {
+  font-size: 0.875rem;
+}

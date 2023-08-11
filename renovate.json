@@ -1,0 +1,22 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:base",
+    ":assignAndReview(Alexander-Ruedi)",
+    ":automergeDisabled",
+    "schedule:nonOfficeHours",
+    ":semanticCommitTypeAll(chore)",
+    "group:allNonMajor"
+  ],
+  "labels": ["dependencies"],
+  "lockFileMaintenance": {
+    "enabled": true,
+    "extends": [
+      "schedule:monthly"
+    ]
+  },
+  "patch": {
+    "automerge": true
+  },
+  "schedule": ["every 4 months on the first day of the month"]
+}

@@ -1,0 +1,50 @@
+The following SQL can be used to create a view of the dependencies of cascading delete:
+
+CREATE OR REPLACE VIEW table_dependencies AS (
+WITH RECURSIVE t AS (
+    SELECT
+        c.oid AS origin_id,
+        c.oid::regclass::text AS origin_table,
+        c.oid AS referencing_id,
+        c.oid::regclass::text AS referencing_table,
+        c2.oid AS referenced_id,
+        c2.oid::regclass::text AS referenced_table,
+        ARRAY[c.oid::regclass,c2.oid::regclass] AS chain
+    FROM pg_catalog.pg_constraint AS co
+    INNER JOIN pg_catalog.pg_class AS c ON c.oid = co.conrelid
+    INNER JOIN pg_catalog.pg_class AS c2 ON c2.oid = co.confrelid
+--     Add this line as an input parameter if you want to make a one-off query
+--     WHERE c.oid::regclass::text = 'YOUR TABLE'
+    UNION ALL
+    SELECT
+        t.origin_id,
+        t.origin_table,
+        t.referenced_id AS referencing_id,
+        t.referenced_table AS referencing_table,
+        c3.oid AS referenced_id,
+        c3.oid::regclass::text AS referenced_table,
+        t.chain || c3.oid::regclass AS chain
+    FROM pg_catalog.pg_constraint AS co
+    INNER JOIN pg_catalog.pg_class AS c3 ON c3.oid = co.confrelid
+    INNER JOIN t ON t.referenced_id = co.conrelid
+    WHERE
+        -- prevent infinite recursion by pruning paths where the last entry in
+        -- the path already appears somewhere else in the path
+        NOT (
+            ARRAY[ t.chain[array_upper(t.chain, 1)] ] -- an array containing the last element
+            <@                                        -- "is contained by"
+            t.chain[1:array_upper(t.chain, 1) - 1]    -- a slice of the chain,
+                                                      -- from element 1 to n-1
+        )
+)
+SELECT  origin_table,
+        referenced_table,
+        array_upper(chain,1) AS "depth",
+        array_to_string(chain,',') as chain
+FROM t
+);
+
+Then this should return a nice view:
+SELECT referenced_table as "Delete in feature", origin_table as "will delete in", chain, depth FROM public.table_dependencies order by referenced_table
+
+Then the File PageData.tsx can be updated. (See property 'relatedDelete')

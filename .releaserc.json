@@ -1,0 +1,91 @@
+{
+  "tagFormat": "${version}",
+  "branches": [
+    {
+      "name": "release",
+      "prerelease": false
+    },
+    {
+      "name": "main",
+      "prerelease": "rc"
+    }
+  ],
+  "plugins": [
+    [
+      "@semantic-release/commit-analyzer",
+      {
+        "preset": "conventionalcommits",
+        "releaseRules": [
+          {
+            "type": "chore",
+            "release": "patch"
+          },
+          {
+            "type": "chore",
+            "scope": "deps",
+            "release": false
+          },
+          {
+            "type": "perf",
+            "release": "patch"
+          },
+          {
+            "type": "refactor",
+            "release": "patch"
+          },
+          {
+            "type": "test",
+            "release": "patch"
+          }
+        ]
+      }
+    ],
+    [
+      "@semantic-release/release-notes-generator",
+      {
+        "preset": "conventionalcommits",
+        "presetConfig": {
+          "types": [
+            {
+              "type": "feat",
+              "section": "Features"
+            },
+            {
+              "type": "fix",
+              "section": "Bug Fixes"
+            },
+            {
+              "type": "perf",
+              "section": "Performance"
+            },
+            {
+              "type": "chore",
+              "section": "Miscellaneous"
+            },
+            {
+              "type": "refactor",
+              "section": "Miscellaneous"
+            },
+            {
+              "type": "test",
+              "section": "Tests"
+            }
+          ]
+        }
+      }
+    ],
+    [
+      "@semantic-release/exec",
+      {
+        "prepareCmd": "docker build -t ghcr.io/optravis-llc/service-charges-frontend:${nextRelease.version} .",
+        "publishCmd": "docker push ghcr.io/optravis-llc/service-charges-frontend:${nextRelease.version}"
+      }
+    ],
+    [
+      "@semantic-release/github",
+      {
+        "successComment": ":tada: This has been resolved in version [${nextRelease.version}](<github_release_url>) :tada:"
+      }
+    ]
+  ]
+}
