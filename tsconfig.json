@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "experimentalDecorators": true,
     "target": "es6",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": false,
@@ -13,6 +14,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
+    "@typescript-eslint/ban-ts-ignore": "off"
   },
   "include": ["src"]
 }

@@ -40,33 +40,33 @@ export const crudVerifyMaterialMapping1Updated = {
 export const crudCreateMaterialMappings = {
   materialMapping: {
     providerNames: ["second-code-test company2", "third-company-test company3"],
-    directMaterialCode: "example direct code",
-    directMaterialName: "example direct name",
-    indirectMaterialCode: "example indirect code",
-    indirectMaterialName: "example indirect name",
+    directMaterialCode: "example0 direct code",
+    directMaterialName: "example0 direct name",
+    indirectMaterialCode: "example0 indirect code",
+    indirectMaterialName: "example0 indirect name",
   },
 };
 export const crudVerifyMaterialMapping2 = {
   materialMapping: {
     providerName: "second-code-test company2",
-    directMaterialCode: "example direct code",
-    directMaterialName: "example direct name",
-    indirectMaterialCode: "example indirect code",
-    indirectMaterialName: "example indirect name",
+    directMaterialCode: "example0 direct code",
+    directMaterialName: "example0 direct name",
+    indirectMaterialCode: "example0 indirect code",
+    indirectMaterialName: "example0 indirect name",
   },
 };
 export const crudVerifyMaterialMapping3 = {
   materialMapping: {
     providerName: "third-company-test company3",
-    directMaterialCode: "example direct code",
-    directMaterialName: "example direct name",
-    indirectMaterialCode: "example indirect code",
-    indirectMaterialName: "example indirect name",
+    directMaterialCode: "example0 direct code",
+    directMaterialName: "example0 direct name",
+    indirectMaterialCode: "example0 indirect code",
+    indirectMaterialName: "example0 indirect name",
   },
 };
 
 export const crudDeleteMaterialMappings = {
   providerNames: ["second-code-test company2", "third-company-test company3"],
-  directDummyMaterialNames: ["example direct code-example direct name"],
-  indirectDummyMaterialNames: ["example indirect code-example indirect name"],
+  directDummyMaterialNames: ["example0 direct code-example0 direct name"],
+  indirectDummyMaterialNames: ["example0 indirect code-example0 indirect name"],
 };

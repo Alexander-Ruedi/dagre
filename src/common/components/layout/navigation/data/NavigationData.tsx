@@ -27,6 +27,7 @@ export const navigation: Array<NavigationModel> = [
     children: [
       { name: "D3", href: "dagre-d3", current: true },
       { name: "Antv", href: "dagre-antv", current: false },
+      { name: "Klay cytoscape", href: "klay-cytoscape", current: false },
     ],
   },
 ];

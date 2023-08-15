@@ -1,6 +1,6 @@
 import { DagreData } from "../models/DataModels";
 
-export const example: DagreData = {
+export const example0: DagreData = {
   nodes: [
     {
       id: "CH",
